@@ -36,14 +36,14 @@
 
 	
 if ( browser.versions.weixin ) {
-	document.getElementById('mcover').style.display='block';
+	document.getElementById('mcover').style.display='none';
 } else if (browser.versions.ios || browser.versions.iPhone || browser.versions.iPad) {
-	//alert(iosUrl);
+	alert(iosUrl);
 	window.location=iosUrl;
 }else if (browser.versions.android) {
-	//alert(androidUrl);
+	alert(androidUrl);
 
-	//window.location=androidUrl;
+	window.location=androidUrl;
 } else
 	{
 
@@ -184,7 +184,7 @@ body{text-align:center}
 		</div>
 		<div class="col-md-2">
 			 
-			<button type="button" class="btn btn-lg btn-block active" style="margin-top:20px" width="200" onClick="onClickDown()">下载安装</button>
+			<button type="button" class="btn btn-lg btn-block active" style="margin-top:20px" width="200"  onClick="onClickDown()">下载安装</button>
 		</div>
 		<div class="col-md-5">
 
