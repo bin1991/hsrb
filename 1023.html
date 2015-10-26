@@ -12,60 +12,51 @@
 <script type="text/javascript">
 	var androidUrl="http://www1.seatelgroup.com/app/hsrb/app-release.apk";
 	var iosUrl = "https://appsto.re/kh/_NYR9.i";
-    $(function () {
-        function isWeiXin() {
-            var ua = window.navigator.userAgent.toLowerCase();
-            if (ua.match(/MicroMessenger/i) == 'micromessenger') {
-                return true;
-            } else {
-                return false;
-            }
-        }
+	var browser = {
+	versions: function() {
+	  
+		var u = navigator.userAgent, app = navigator.appVersion;
 
-        if (browser.versions.ios || browser.versions.iPhone || browser.versions.iPad) {
-            if(isWeiXin()){
-                window.location = iosUrl;
-            }else{
-                window.location = iosUrl;
-            }
-        }else{
-            if(isWeiXin()){
-                window.location = iosUrl;
-            }else{
-                window.location = androidUrl;
-            }
-        }
-    });
+		return {//移动终端浏览器版本信息 
+			trident: u.indexOf('Trident') > -1, //IE内核
+			presto: u.indexOf('Presto') > -1, //opera内核
+			webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+			gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+			mobile: !!u.match(/AppleWebKit.*Mobile.*/) || !!u.match(/AppleWebKit/), //是否为移动终端
+			ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+			android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+			iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者QQHD浏览器
+			iPad: u.indexOf('iPad') > -1, //是否iPad
+			webApp: u.indexOf('Safari') == -1, //是否web应该程序，没有头部与底部
+                        weixin: u.indexOf('MicroMessenger') > -1 //weixin
+		};
+	}(),
+	language: (navigator.browserLanguage || navigator.language).toLowerCase()
+}
 
-    /*
-     * 智能机浏览器版本信息:
-     *
-     */
+	
+if ( browser.versions.weixin ) {
+	document.getElementById('mcover').style.display='block';
+} else if (browser.versions.ios || browser.versions.iPhone || browser.versions.iPad) {
+	//alert(iosUrl);
+	window.location=iosUrl;
+}else if (browser.versions.android) {
+	//alert(androidUrl);
 
-    var browser = {
-        versions: function () {
-            var u = navigator.userAgent, app = navigator.appVersion;
-            return {//移动终端浏览器版本信息
-                trident: u.indexOf('Trident') > -1, //IE内核
-                presto: u.indexOf('Presto') > -1, //opera内核
-                webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
-                gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
-                mobile: !!u.match(/AppleWebKit.*Mobile.*/) || !!u.match(/AppleWebKit/), //是否为移动终端
-                ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
-                android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
-                iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者QQHD浏览器
-                iPad: u.indexOf('iPad') > -1, //是否iPad
-                webApp: u.indexOf('Safari') == -1 //是否web应该程序，没有头部与底部
-            };
-        }(),
-        language: (navigator.browserLanguage || navigator.language).toLowerCase()
-    }
+	//window.location=androidUrl;
+} else
+	{
 
+	alert(browser.versions);
+	}
 </script>
 <script language=javascript>
 	function onClickDown(){
 
+
 	var u = navigator.userAgent.toLowerCase();
+
+	
 
 	if ( u.indexOf('micromessenger') > -1 ) 
 	{
@@ -141,9 +132,15 @@
 		<div class="col-md-2">
 
     <div>
-        <div id="mcover" onclick="document.getElementById('mcover').style.display='';" style="display: block;">
-            <img align="top" src="short_arrow2.jpg">
-        </div>
+        <table cellspacing="0" cellpadding="0">
+            <tr>
+                <td>
+                    <div id="mcover" onclick="document.getElementById('mcover').style.display='';" style="display: none;">
+     <img  height="150" align="top" src="short_arrow.jpg" class="img-rounded;width:100%;">
+</div>
+                </td>
+            </tr>
+        </table>
     </div>
 
 </div>
@@ -154,10 +151,10 @@
 <div class="row" >
 
 		<div class="col-md-12">
-
+			
 		</div>
 
-	</div>
+	</div>	
 	<div class="row">
 		<div class="col-md-5">
 		</div>
@@ -168,7 +165,7 @@
 		</div>
 		<div class="col-md-5">
 		</div>
-	</div>
+	</div>	
 	<div class="row">
 		<div class="col-md-5">
 		</div>
@@ -186,8 +183,8 @@ body{text-align:center}
 		<div class="col-md-5">
 		</div>
 		<div class="col-md-2">
-
-			<button type="button" class="btn btn-lg btn-block active" style="margin-top:20px" width="200"  onClick="onClickDown()">下载安装</button>
+			 
+			<button type="button" class="btn btn-lg btn-block active" style="margin-top:20px" width="200" onClick="onClickDown()">下载安装</button>
 		</div>
 		<div class="col-md-5">
 
